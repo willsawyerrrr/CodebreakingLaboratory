@@ -16,9 +16,14 @@ import rotor
 
 # Part A
 #   Encrypt
-engine = enigma.Enigma(rotor.ROTOR_Reflector_A, rotor.ROTOR_I,
-                                rotor.ROTOR_II, rotor.ROTOR_III, key="ABC",
-                                plugs="AA BB CC DD EE")
+engine = enigma.Enigma(
+    rotor.ROTOR_Reflector_A,
+    rotor.ROTOR_I,
+    rotor.ROTOR_II,
+    rotor.ROTOR_III,
+    key="ABC",
+    plugs="AA BB CC DD EE",
+)
 
 message = input("Enter a message: ")
 print("Message:", message)
@@ -26,20 +31,32 @@ secret = engine.encipher(message)
 print("Encoded Message:", secret)
 
 #   Decrypt
-engine = enigma.Enigma(rotor.ROTOR_Reflector_A, rotor.ROTOR_I,
-                                rotor.ROTOR_II, rotor.ROTOR_III, key="ABC",
-                                plugs="AA BB CC DD EE")
+engine = enigma.Enigma(
+    rotor.ROTOR_Reflector_A,
+    rotor.ROTOR_I,
+    rotor.ROTOR_II,
+    rotor.ROTOR_III,
+    key="ABC",
+    plugs="AA BB CC DD EE",
+)
 
 decrypted = engine.encipher(secret)
 print("Decoded Message:", decrypted)
 
 
 # Part B
-shakesEngine = enigma.Enigma(rotor.ROTOR_Reflector_A, rotor.ROTOR_I,
-                                rotor.ROTOR_II, rotor.ROTOR_III, key="SSC",
-                                plugs="AA BB CC DD EE")
+shakesEngine = enigma.Enigma(
+    rotor.ROTOR_Reflector_A,
+    rotor.ROTOR_I,
+    rotor.ROTOR_II,
+    rotor.ROTOR_III,
+    key="SSC",
+    plugs="AA BB CC DD EE",
+)
 
-ShakesHorribleMessage = "Vxye ajgh D yf? Ptn uluo yjgco L ws nznde czidn. Bsj ccj qdbk qjph wpw ypxvu!"
+ShakesHorribleMessage = (
+    "Vxye ajgh D yf? Ptn uluo yjgco L ws nznde czidn. Bsj ccj qdbk qjph wpw ypxvu!"
+)
 
 decryptedHorribleMessage = shakesEngine.encipher(ShakesHorribleMessage)
 print("Shakes' decrypted message:", decryptedHorribleMessage)

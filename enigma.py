@@ -1,14 +1,15 @@
 #!/usr/bin/env python
-#-*- coding: utf-8 -*-
-'''
+# -*- coding: utf-8 -*-
+"""
 pyEnigma, a Python Enigma cypher machine simulator.
 
 Copyright Christophe Goessen (initial author) and Cédric Bonhomme
 
 GPLv3 license
-'''
+"""
 
 from rotor import *
+
 
 class Enigma(object):
     """Represents an Enigma machine.
@@ -18,9 +19,9 @@ class Enigma(object):
     - key: initial state of rotors;
     - plus: plugboard settings.
     """
+
     def __init__(self, ref, r1, r2, r3, key="AAA", plugs="", ringset=1):
-        """Initialization of the Enigma machine.
-        """
+        """Initialization of the Enigma machine."""
         self.reflector = ref
         self.rotor1 = r1
         self.rotor2 = r2
@@ -29,30 +30,30 @@ class Enigma(object):
         self.rotor1.state = key[0]
         self.rotor2.state = key[1]
         self.rotor3.state = key[2]
-        self.reflector.state = 'A'
+        self.reflector.state = "A"
         self.ringset = ringset
 
-        plugboard_settings= [(elem[0], elem[1]) for elem in plugs.split(" ")]
+        plugboard_settings = [(elem[0], elem[1]) for elem in plugs.split(" ")]
 
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         alpha_out = [" "] * 26
         for i in range(len(alpha)):
             alpha_out[i] = alpha[i]
         for k, v in plugboard_settings:
-            alpha_out[ord(k)-ord('A')] = v
-            alpha_out[ord(v)-ord('A')] = k
+            alpha_out[ord(k) - ord("A")] = v
+            alpha_out[ord(v) - ord("A")] = k
 
         try:
             self.transtab = str.maketrans(alpha, "".join(alpha_out))
         except:
             # Python 2
             from string import maketrans
-            self.transtab = maketrans(alpha,"".join(alpha_out))
+
+            self.transtab = maketrans(alpha, "".join(alpha_out))
 
     def encipher(self, plaintext_in):
-        """Encrypt 'plaintext_in'.
-        """
-        ciphertext = ''
+        """Encrypt 'plaintext_in'."""
+        ciphertext = ""
         plaintext_in_upper = plaintext_in.upper()
         plaintext = plaintext_in_upper.translate(self.transtab)
         for c in plaintext:
@@ -87,8 +88,7 @@ class Enigma(object):
         return fres
 
     def __str__(self):
-        """Pretty display.
-        """
+        """Pretty display."""
         return """
         Reflector: %s
 
@@ -96,4 +96,9 @@ class Enigma(object):
 
         Rotor 2: %s
 
-        Rotor 3: %s""" % (self.reflector, self.rotor1, self.rotor2, self.rotor3)
+        Rotor 3: %s""" % (
+            self.reflector,
+            self.rotor1,
+            self.rotor2,
+            self.rotor3,
+        )

@@ -12,10 +12,13 @@ Created on Tue Feb  5 12:17:02 2019
 """
 
 import string
+
 import enigma
 import rotor
 
-letters = string.ascii_letters #contains 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+letters = (
+    string.ascii_letters
+)  # contains 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 capitalLetters = letters[-26:]
 
 ShakesHorribleMessage = "Xm xti ca idjmq Ecokta Rkhoxuu! Kdiu gm xex oft uz yjwenv qik parwc hs emrvm sfzu qnwfg. Gvgt vz vih rlt ly cnvpym xtq sgfvk jp jatrl irzru oubjo odp uso nsty jm gfp lkwrx pliv ojfo rl rylm isn aueuom! Gdwm Qopjmw!"
@@ -37,12 +40,17 @@ for i in range(26):
         for k in range(26):
             t += 1
             key = rotorOne + rotorTwo + capitalLetters[k]
-            engine = enigma.Enigma(rotor.ROTOR_Reflector_A, rotor.ROTOR_I,
-                                rotor.ROTOR_II, rotor.ROTOR_III, key=key,
-                                plugs="AA BB CC DD EE")
+            engine = enigma.Enigma(
+                rotor.ROTOR_Reflector_A,
+                rotor.ROTOR_I,
+                rotor.ROTOR_II,
+                rotor.ROTOR_III,
+                key=key,
+                plugs="AA BB CC DD EE",
+            )
             decryptedMessage = engine.encipher(ShakesHorribleMessage)
             cribSubstring = decryptedMessage[-12:]
-            if (cribSubstring == crib):
+            if cribSubstring == crib:
                 breakOut = True
                 break
 
@@ -51,7 +59,7 @@ print(decryptedMessage)
 
 
 # Part D
-print("Number of tries:", t) # 11772
+print("Number of tries:", t)  # 11772
 #    My computer took around 45 seconds to search just under 12000 combinations.
 
 

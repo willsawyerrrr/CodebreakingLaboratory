@@ -11,20 +11,24 @@ Created on Fri Feb  1 23:06:50 2019
 
 import string
 
-letters = string.ascii_letters #contains 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+letters = (
+    string.ascii_letters
+)  # contains 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
 
 def generateCypher(offset):
     offset = offset
     totalLetters = 26
-    keys = {' ': ' '} # Caesar Cypher
-    invKeys = {' ': ' '} # Inverse Caesar Cypher
+    keys = {" ": " "}  # Caesar Cypher
+    invKeys = {" ": " "}  # Inverse Caesar Cypher
     for index, letter in enumerate(letters):
-        if index < totalLetters: #lowercase
+        if index < totalLetters:  # lowercase
             keys[letter] = letters[(index + offset) % 26]
-        else: #uppercase
+        else:  # uppercase
             keys[letter] = letters[(index + offset) % 26 + 26]
         invKeys[keys[letter]] = letter
     return keys, invKeys
+
 
 def encrypt(message, keys):
     encryptedMessage = []
@@ -33,12 +37,14 @@ def encrypt(message, keys):
     encryptedMessage = "".join(encryptedMessage)
     return encryptedMessage
 
+
 def decrypt(encryptedMessage, invKeys):
     decryptedMessage = []
     for letter in encryptedMessage:
         decryptedMessage.append(invKeys[letter])
     decryptedMessage = "".join(decryptedMessage)
     return decryptedMessage
+
 
 if __name__ == "__main__":
     message = input("Enter a message to encypher: ")
